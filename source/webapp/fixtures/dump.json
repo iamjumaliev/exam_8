@@ -1,0 +1,100 @@
+[
+{
+  "model": "webapp.product",
+  "pk": 1,
+  "fields": {
+    "name": "product 1",
+    "category": "other",
+    "description": "testing description 1",
+    "picture": ""
+  }
+},
+{
+  "model": "webapp.product",
+  "pk": 2,
+  "fields": {
+    "name": "corvette",
+    "category": "cars",
+    "description": "red chevrolete  corvette 1947",
+    "picture": ""
+  }
+},
+{
+  "model": "webapp.product",
+  "pk": 3,
+  "fields": {
+    "name": "Warcraft book",
+    "category": "books",
+    "description": "warcraft encyclopedy second tom",
+    "picture": ""
+  }
+},
+{
+  "model": "webapp.product",
+  "pk": 4,
+  "fields": {
+    "name": "DaftPunk",
+    "category": "music",
+    "description": "DaftPunk new album",
+    "picture": ""
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 1,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$KQkxlqTPBPnz$6PoPdtuqcmzXU0A7G8a88WDj96VnfTm1tjJlpn2Lu6I=",
+    "last_login": "2019-11-16T06:02:35.090Z",
+    "is_superuser": true,
+    "username": "admin",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2019-11-16T05:53:13.495Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "webapp.review",
+  "pk": 1,
+  "fields": {
+    "author": 1,
+    "product": 1,
+    "text": "testing review one",
+    "rating": "4.50"
+  }
+},
+{
+  "model": "webapp.review",
+  "pk": 2,
+  "fields": {
+    "author": 1,
+    "product": 2,
+    "text": "testing review 2",
+    "rating": "2.00"
+  }
+},
+{
+  "model": "webapp.review",
+  "pk": 3,
+  "fields": {
+    "author": 1,
+    "product": 3,
+    "text": "testing review 3",
+    "rating": "5.00"
+  }
+},
+{
+  "model": "webapp.review",
+  "pk": 4,
+  "fields": {
+    "author": 1,
+    "product": 4,
+    "text": "testing review four",
+    "rating": "3.00"
+  }
+}
+]
