@@ -24,6 +24,6 @@ class Review(models.Model):
         product = models.ForeignKey('webapp.Product',on_delete=models.CASCADE,verbose_name='продукт',null=False,
                                     blank=False,related_name='product_review')
         text = models.CharField(max_length=3000, null=False, blank=False, verbose_name='описание')
-        rating = models.DecimalField(max_digits=1, decimal_places=1, verbose_name='оценка',null=False, blank=False)
+        rating = models.DecimalField(max_digits=3, decimal_places=2, verbose_name='оценка',null=False, blank=False)
 
 # Create your models here.
