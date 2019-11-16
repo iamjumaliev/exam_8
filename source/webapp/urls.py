@@ -13,7 +13,7 @@ urlpatterns = [
     path('product/update/<int:pk>/',ProductUpdateView.as_view(),name = 'product_update'),
     path('reviews/', ReviewIndexView.as_view(), name='review_index'),
     path('reviews/<int:pk>/', ReviewView.as_view(), name='reviews_view'),
-    path('reviews/create/', ReviewCreateView.as_view(), name='reviews_create'),
+    path('product/<int:pk>review/create/', ReviewCreateView.as_view(), name='reviews_create'),
     path('reviews/delete/<int:pk>/',ReviewDeleteView.as_view(),name = 'reviews_delete'),
     path('reviews/update/<int:pk>/',ReviewUpdateView.as_view(),name = 'reviews_update')
 ]
