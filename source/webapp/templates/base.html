@@ -21,8 +21,13 @@
                     <li class="nav-item">
                         <a href="{% url 'webapp:index' %}" class="nav-link">Home</a>
                     </li>
+                {% if perms.webapp.add_product %}
                     <li>
                         <a href="{% url 'webapp:product_create' %}" class="nav-link">Create question</a>
+                    </li>
+                {% endif %}
+                    <li>
+                        <a href="{% url 'webapp:review_index' %}" class="nav-link">View reviews</a>
                     </li>
                 {% if user.is_authenticated %}
                 {% block menu_links %}{% endblock %}

@@ -1,4 +1,9 @@
 {% extends 'base.html' %}
+{% block menu_links %}
+    <li>
+        <a href="{% url "webapp:reviews_create" product.pk%}">Create porduct</a>
+    </li>
+{% endblock %}
 {% block content %}
     {% if user_obj.profile.avatar %}
         <img class="avatar" src="{{ product.picture.url }}" width="250" height="250" alt="user picture">
@@ -6,4 +11,12 @@
     <h1 class="my-3">{{ product.name }}</h1>
     <p>Категория: {{ product.category }}</p>
     <p>Описание {{ product.description }}</p>
+    <p>Оценка: {{ mark }}</p>
+    {% for review in reviews %}
+        <hr>
+        <h2>Автор {{ review.author }}</h2>
+        <p>Email: {{ review.author.email }}</p>
+        <p>Отзыв: {{ review.text }}</p>
+        <p>Оценка: {{ review.rating }}</p>
+    {% endfor %}
 {% endblock %}

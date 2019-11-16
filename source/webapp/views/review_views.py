@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.shortcuts import redirect, get_object_or_404
 from django.urls import reverse, reverse_lazy
 from webapp.forms import  ReviewForm
@@ -43,16 +44,20 @@ class ReviewCreateView(CreateView):
         return super().dispatch(request, *args, **kwargs)
 
     def get_success_url(self):
-        return reverse('webapp:status_view', kwargs={'pk': self.object.pk})
+        return reverse('webapp:reviews_view', kwargs={'pk': self.object.pk})
 
 
-class ReviewUpdateView(UpdateView):
+class ReviewUpdateView(PermissionRequiredMixin,UpdateView):
     form_class = ReviewForm
     template_name = 'webapp/review/update.html'
     model = Review
     context_object_name = 'review'
+    permission_required = 'webapp.change_review'
+    permission_denied_message = "Доступ запрещён"
 
-
+    def has_permission(self):
+        super().has_permission()
+        return super().has_permission() or self.request.user == self.get_object().author
 
     def dispatch(self, request, *args, **kwargs):
         if not request.user.is_authenticated:
@@ -60,14 +65,19 @@ class ReviewUpdateView(UpdateView):
         return super().dispatch(request, *args, **kwargs)
 
     def get_success_url(self):
-        return reverse('webapp:status_view', kwargs={'pk': self.object.pk})
+        return reverse('webapp:reviews_view', kwargs={'pk': self.object.pk})
 
-class ReviewDeleteView(DeleteView):
+class ReviewDeleteView(PermissionRequiredMixin,DeleteView):
     model = Review
     template_name = 'webapp/review/delete.html'
-    success_url = reverse_lazy('webapp:status')
+    success_url = reverse_lazy('webapp:review_index')
     context_object_name =  'review'
+    permission_required = 'webapp.delete_review'
+    permission_denied_message = "Доступ запрещён"
 
+    def has_permission(self):
+        super().has_permission()
+        return super().has_permission() or self.request.user == self.get_object().author
 
     def dispatch(self, request, *args, **kwargs):
         if not request.user.is_authenticated:

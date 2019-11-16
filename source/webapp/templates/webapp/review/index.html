@@ -8,14 +8,18 @@
                     <div class="card-body">
 
                         <h2 class="card-text card-link" style="height: 40px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden">
-                            <a href="{% url 'webapp:review_view' review.pk%}"> Отзыв о {{ review.product }} </a>
+                            <a href="{% url 'webapp:reviews_view' review.pk%}"> Отзыв о {{ review.product }} </a>
                         </h2>
+                        {% if perms.webapp.delete_review or user == review.author %}
                         <li>
-                            <a href="{% url 'webapp:review_delete' review.pk %}">Delete review</a>
+                            <a href="{% url 'webapp:reviews_delete' review.pk %}">Delete review</a>
                         </li>
+                        {% endif %}
+                        {% if perms.webapp.change_review or user == review.author %}
                         <li>
-                            <a href="{% url 'webapp:review_update' review.pk %}">Update review</a>
+                            <a href="{% url 'webapp:reviews_update' review.pk %}">Update review</a>
                         </li>
+                        {% endif %}
                     </div>
                 </div>
             </div>
