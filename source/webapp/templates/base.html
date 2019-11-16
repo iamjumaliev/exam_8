@@ -22,11 +22,34 @@
                         <a href="{% url 'webapp:index' %}" class="nav-link">Home</a>
                     </li>
                     <li>
-                        <a href="{% url 'webapp:product_create' %}" class="nav-link">Create product</a>
+                        <a href="{% url 'webapp:product_create' %}" class="nav-link">Create question</a>
                     </li>
-{#                    <li>#}
-{#                        <a href="{% url 'answer' %}" class="nav-link">Answers</a>#}
-{#                    </li>#}
+                {% if user.is_authenticated %}
+                {% block menu_links %}{% endblock %}
+                <li class="menu-right">
+                    <a href="{% url 'accounts:logout' %}" class="nav-link">
+                        Выход
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'accounts:user_detail' request.user.pk %}" class="nav-link">
+                        Привет, {{ request.user }}!
+                    </a>
+                </li>
+            {% else %}
+                <li class="menu-right">
+                    <a href="{% url 'accounts:login' %}" class="nav-link">
+                        Вход
+                    </a>
+                </li>
+                <li class="menu-right">
+                    <a href="{% url 'accounts:create' %}" class="nav-link">
+                        Регистрация
+                    </a>
+                </li>
+                <li>
+            </li>
+            {% endif %}
                     {% block menu %}{% endblock %}
                 </ul>
             </div>

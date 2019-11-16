@@ -12,8 +12,9 @@
         <img class="avatar" src="{{ user_obj.profile.avatar.url }}" width="250" height="250" alt="user picture">
     {% endif %}
     <p>First Name: <b>{{ user_obj.first_name }}</b></p>
-    <p>Last Name: {{ user_obj.last_name }}</p>
     <p>Email: {{ user_obj.email }}</p>
-    <p>Github: <a href="{{ user_obj.profile.github }}">{{ user_obj.profile.github }}</a></p>
-    <p>About: {{ user_obj.profile.about }}</p>
+{#    {% for review in user_obj.review_creator.review %}#}
+{#        <h2>Users reviews</h2>#}
+{#        <p>{{ review }}</p>#}
+{#    {% endfor %}#}
 {% endblock %}
