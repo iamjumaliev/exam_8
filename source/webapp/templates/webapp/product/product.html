@@ -1,10 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-
-</body>
-</html>
+{% extends 'base.html' %}
+{% block content %}
+    {% if user_obj.profile.avatar %}
+        <img class="avatar" src="{{ product.picture.url }}" width="250" height="250" alt="user picture">
+    {% endif %}
+    <h1 class="my-3">{{ product.name }}</h1>
+    <p>Категория: {{ product.category }}</p>
+    <p>Описание {{ product.description }}</p>
+{% endblock %}

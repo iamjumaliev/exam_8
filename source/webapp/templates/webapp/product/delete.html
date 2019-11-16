@@ -1,10 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-
-</body>
-</html>
+{% extends 'base.html' %}
+{% block title %}Delete product{% endblock %}
+{% block menu %}
+{% endblock %}
+{% block content %}
+    <h1>Are you sure want to delete Task
+        <a href="{% url 'webapp:product_view' product.pk %}">{{ product.name }}</a>?
+    </h1>
+     {% if perms.webapp.delete_mission %}
+        <form method="POST" action="{% url 'webapp:product_delete' product.pk %}" class="text-center">
+            {% csrf_token %}
+            <p><input type="submit" class = 'btn' value="Confirm"></p>
+            <p><a href="{% url 'webapp:index'  %}" class = 'btn'>Cancel</a></p>
+        </form>
+    {% endif %}
+{% endblock %}
