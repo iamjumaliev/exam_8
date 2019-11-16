@@ -6,7 +6,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
 from django.views.generic import DetailView, UpdateView, ListView
 
-from accounts.models import UserProfile
+
 from .forms import UserCreationForm, UserChangePasswordForm
 
 
@@ -75,11 +75,5 @@ class UserChangePasswordView(UserPassesTestMixin, UpdateView):
         return reverse('accounts:login')
 
 
-class UsersList(ListView):
-    template_name = 'users_list.html'
-    context_object_name = 'users'
-    model = User
-    paginate_by = 3
-    paginate_orphans = 1
 
 # Create your views here.

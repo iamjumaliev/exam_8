@@ -72,16 +72,11 @@ class UserCreationForm(forms.ModelForm):
 
 class UserChangeForm(forms.ModelForm):
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.fields['github'] = forms.URLField(required=False)
-        self.fields['avatar'] = forms.ImageField()
-        self.fields['about'] = forms.CharField()
 
     class Meta:
         model = User
         fields = ['first_name', 'last_name', 'email']
-        profile_fields = ['avatar', 'about', 'github']
+        profile_fields = ['avatar','user']
         labels = {'first_name': 'Имя', 'last_name': 'Фамилия', 'email': 'Email'}
 
     def get_initial_for_field(self, field, field_name):
@@ -104,17 +99,7 @@ class UserChangeForm(forms.ModelForm):
             profile.save()
         return profile
 
-    def clean_github(self):
-        gl = self.cleaned_data.get('github')
-        g = 'github.com'
-        l = ''
-        if l == gl:
-            return gl
-        elif gl.find(g) in range(0,11):
-            print(gl.find(g))
-            return gl
-        else:
-            raise forms.ValidationError('error')
+
 
 class UserChangePasswordForm(forms.ModelForm):
     password = forms.CharField(max_length=100, required=True, label='New Password',
