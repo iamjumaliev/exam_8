@@ -71,7 +71,10 @@ class UserCreationForm(forms.ModelForm):
         }
 
 class UserChangeForm(forms.ModelForm):
-        avatar = forms.ImageField(label='Аватар', required=False)
+        def __init__(self, **kwargs):
+            super().__init__(**kwargs)
+            self.fields['avatar'] = forms.ImageField(required=False, label="Avatar")
+        # avatar = forms.ImageField(label='Аватар', required=False)
 
         def get_initial_for_field(self, field, field_name):
             if field_name in self.Meta.profile_fields:
@@ -100,7 +103,7 @@ class UserChangeForm(forms.ModelForm):
 
         class Meta:
             model = User
-            fields = ['first_name', 'last_name', 'email', 'avatar']
+            fields = ['first_name', 'last_name', 'email']
             profile_fields = ['avatar']
             labels = {'first_name': 'Имя', 'last_name': 'Фамилия', 'email': 'Email'}
 
