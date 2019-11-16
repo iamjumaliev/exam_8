@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 {% block content %}
-    <h1 class="my-3">{{ review.author }}</h1>
+    <a href="{% url 'accounts:user_detail' review.author.pk%}">
+        <h1 class="my-3">{{ review.author }}</h1>
+    </a>
     <p>Продукт: {{ review.product }}</p>
     <p>Описание {{ review.text }}</p>
     <p>Оценка: {{ review.rating }}</p>

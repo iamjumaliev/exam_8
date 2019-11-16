@@ -3,7 +3,7 @@
 {% block menu %}
 {% endblock %}
 {% block content %}
-    <form method="POST" action="{% url 'webapp:reviews_create' review.pk%}">
+    <form method="POST" action="{% url 'webapp:reviews_create' product.pk%}">
         {% include 'partial/form.html' with button_text="Create" %}
     </form>
 {% endblock %}

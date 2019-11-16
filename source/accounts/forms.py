@@ -71,37 +71,38 @@ class UserCreationForm(forms.ModelForm):
         }
 
 class UserChangeForm(forms.ModelForm):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.fields['avatar'] = forms.ImageField()
+        avatar = forms.ImageField(label='Аватар', required=False)
 
-    class Meta:
-        model = User
-        fields = ['first_name', 'last_name', 'email']
-        profile_fields = ['avatar','user']
-        labels = {'first_name': 'Имя', 'last_name': 'Фамилия', 'email': 'Email'}
+        def get_initial_for_field(self, field, field_name):
+            if field_name in self.Meta.profile_fields:
+                try:
+                    return getattr(self.instance.profile, field_name)
+                except UserProfile.DoesNotExist:
+                    return None
+            return super().get_initial_for_field(field, field_name)
 
-    def get_initial_for_field(self, field, field_name):
-        if field_name in self.Meta.profile_fields:
-            return getattr(self.instance.profile, field_name)
-        return super().get_initial_for_field(field, field_name)
+        def save(self, commit=True):
+            user = super().save(commit)
+            self.save_profile(commit)
+            return user
 
-    def save(self, commit=True):
-        user = super().save(commit=commit)
-        user.profile = self.save_profile(commit)
-        return user
+        def save_profile(self, commit=True):
+            try:
+                profile = self.instance.profile
+            except UserProfile.DoesNotExist:
+                profile = UserProfile.objects.create(user=self.instance)
+            for field in self.Meta.profile_fields:
+                setattr(profile, field, self.cleaned_data[field])
+            if not profile.avatar:
+                profile.avatar = None
+            if commit:
+                profile.save()
 
-    def save_profile(self, commit=True):
-        profile, _ = UserProfile.objects.get_or_create(user=self.instance)
-        for field in self.Meta.profile_fields:
-            setattr(profile, field, self.cleaned_data.get(field))
-        if not profile.avatar:
-            profile.avatar = None
-        if commit:
-            profile.save()
-        return profile
-
-
+        class Meta:
+            model = User
+            fields = ['first_name', 'last_name', 'email', 'avatar']
+            profile_fields = ['avatar']
+            labels = {'first_name': 'Имя', 'last_name': 'Фамилия', 'email': 'Email'}
 
 class UserChangePasswordForm(forms.ModelForm):
     password = forms.CharField(max_length=100, required=True, label='New Password',

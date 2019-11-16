@@ -13,8 +13,11 @@
     {% endif %}
     <p>First Name: <b>{{ user_obj.first_name }}</b></p>
     <p>Email: {{ user_obj.email }}</p>
-{#    {% for review in user_obj.review_creator.review %}#}
-{#        <h2>Users reviews</h2>#}
-{#        <p>{{ review }}</p>#}
-{#    {% endfor %}#}
+    {% for review in reviews %}
+        <h2>Users reviews</h2>
+        <p>{{ review.product.name }}</p>
+        <p>{{ review.text }}</p>
+        <p>{{ review.rating }}</p>
+        <hr>
+    {% endfor %}
 {% endblock %}

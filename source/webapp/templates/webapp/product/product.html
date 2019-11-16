@@ -1,7 +1,8 @@
 {% extends 'base.html' %}
+{% load staticfiles %}
 {% block menu_links %}
     <li>
-        <a href="{% url "webapp:reviews_create" product.pk%}">Create porduct</a>
+        <a href="{% url "webapp:reviews_create" product.pk%}">Create review</a>
     </li>
 {% endblock %}
 {% block content %}
@@ -14,10 +15,12 @@
     <h1 class="my-3">{{ product.name }}</h1>
     <p>Категория: {{ product.category }}</p>
     <p>Описание {{ product.description }}</p>
-    <p>Оценка: {{ mark }}</p>
+    <p>Оценка: {{ product.get_rating }}</p>
     {% for review in reviews %}
         <hr>
-        <h2>Автор {{ review.author }}</h2>
+        <a href="{% url 'accounts:user_detail' review.author.pk%}">
+            <h2>Автор {{ review.author }}</h2>
+        </a>
         <p>Email: {{ review.author.email }}</p>
         <p>Отзыв: {{ review.text }}</p>
         <p>Оценка: {{ review.rating }}</p>

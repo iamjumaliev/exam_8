@@ -11,7 +11,7 @@
                         <h2 class="card-text card-link" style="height: 40px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden">
                             <a href="{% url 'webapp:product_view' product.pk%}"> {{ product.name }} </a>
                         </h2>
-                        <p> Сука {{ marks.value }}</p>
+                        <p>{{ product.get_rating }}</p>
                         {% if perms.webapp.delete_product %}
                         <li>
                             <a href="{% url 'webapp:product_delete' product.pk %}">Delete product</a>

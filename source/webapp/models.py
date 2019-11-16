@@ -18,6 +18,19 @@ class Product(models.Model):
     description = models.CharField(max_length=3000, null=False, blank=True, verbose_name='описание')
     picture =  models.ImageField(upload_to='product_images', null=True, blank=True, verbose_name='картинка')
 
+    def get_rating(self):
+        reviews = self.product_review.all()
+        qty = len(reviews)
+        rate = 0
+        for product in reviews:
+            rating = product.rating
+            rate += rating
+        if qty == 0:
+            mark = rate / 1
+        else:
+            mark = rate / qty
+        return mark
+
 class Review(models.Model):
         author = models.ForeignKey(User,related_name='review_creator',on_delete=models.CASCADE,
                                    verbose_name='автор',null=False,blank=False)

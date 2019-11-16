@@ -13,27 +13,6 @@ class IndexView(ListView):
     context_object_name = 'products'
     model = Product
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data()
-        products = list(self.get_queryset())
-        marks = {}
-        rate = 0
-        for product in products:
-            reviews = Review.objects.all().filter(product=product)
-            qty = len(reviews)
-            for product in reviews:
-                rating = product.rating
-                rate += rating
-            if qty == 0:
-                mark = rate / 1
-            else:
-                mark = rate / qty
-            print(qty)
-            marks[product] = mark
-
-        context['marks'] = marks
-        return context
-
 class ProductView(DetailView):
     template_name = 'webapp/product/product.html'
     model = Product
@@ -44,16 +23,6 @@ class ProductView(DetailView):
         context = super().get_context_data()
         product = self.object
         reviews = Review.objects.all().filter(product=product)
-        qty = len(reviews)
-        rate = 0
-        for product in reviews:
-            rating = product.rating
-            rate += rating
-        if qty == 0:
-            mark = rate / 1
-        else:
-            mark = rate / qty
-        context['mark'] = mark
         context['reviews'] = reviews
         return context
 
