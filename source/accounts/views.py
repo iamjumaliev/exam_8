@@ -57,6 +57,7 @@ class UserChangeView(UserPassesTestMixin, UpdateView):
         return self.get_object() == self.request.user
 
 
+
     def get_success_url(self):
         return reverse('accounts:user_detail', kwargs={'pk': self.object.pk})
 

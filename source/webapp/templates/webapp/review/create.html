@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block title %}Create review{% endblock %}
+{% block menu %}
+{% endblock %}
+{% block content %}
+    <form method="POST" action="{% url 'webapp:review_create' %}">
+        {% include 'partial/form.html' with button_text="Create" %}
+    </form>
+{% endblock %}

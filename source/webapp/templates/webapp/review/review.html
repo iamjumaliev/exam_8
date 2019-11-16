@@ -1,0 +1,7 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h1 class="my-3">{{ review.author }}</h1>
+    <p>Продукт: {{ review.product }}</p>
+    <p>Описание {{ review.text }}</p>
+    <p>Оценка: {{ review.rating }}</p>
+{% endblock %}

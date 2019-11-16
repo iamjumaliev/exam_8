@@ -10,9 +10,6 @@ class IndexView(ListView):
     template_name = 'webapp/product/index.html'
     context_object_name = 'products'
     model = Product
-    # ordering = ['-created_at']
-    paginate_by = 5
-    paginate_orphans = 1
 
 
 class ProductView(DetailView):

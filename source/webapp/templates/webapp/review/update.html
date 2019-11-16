@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block title %}Update Product{% endblock %}
+{% block menu %}
+{% endblock %}
+{% block content %}
+    <h1>Update review
+        <a href="{% url 'webapp:review_view' product.pk %}"> Отзыв о {{ review.product }}</a>
+    </h1>
+    <form method="POST" action="{% url 'webapp:review_update' review.pk %}">
+        {% include 'partial/form.html' with button_text="Update" %}
+    </form>
+{% endblock %}
