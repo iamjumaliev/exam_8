@@ -27,7 +27,7 @@ class IndexView(ListView):
             if qty == 0:
                 mark = rate / 1
             else:
-                mark = rate/ qty
+                mark = rate / qty
             print(qty)
             marks[product] = mark
 
@@ -49,7 +49,10 @@ class ProductView(DetailView):
         for product in reviews:
             rating = product.rating
             rate += rating
-        mark = rate / qty
+        if qty == 0:
+            mark = rate / 1
+        else:
+            mark = rate / qty
         context['mark'] = mark
         context['reviews'] = reviews
         return context

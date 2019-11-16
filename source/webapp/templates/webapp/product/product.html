@@ -5,8 +5,11 @@
     </li>
 {% endblock %}
 {% block content %}
-    {% if user_obj.profile.avatar %}
-        <img class="avatar" src="{{ product.picture.url }}" width="250" height="250" alt="user picture">
+    {% if product.picture %}
+        <img class="avatar" src="{{ product.picture.url }}" width="250" height="250" alt="{{ product.name }}">
+    {% endif %}
+    {% if not product.picture %}
+        <img class="avatar" src="{% static 'image/picture.png' %}" width="250" height="250" alt="{{ product.name }}">
     {% endif %}
     <h1 class="my-3">{{ product.name }}</h1>
     <p>Категория: {{ product.category }}</p>

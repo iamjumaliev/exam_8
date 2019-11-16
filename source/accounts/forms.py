@@ -71,7 +71,9 @@ class UserCreationForm(forms.ModelForm):
         }
 
 class UserChangeForm(forms.ModelForm):
-
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['avatar'] = forms.ImageField()
 
     class Meta:
         model = User
